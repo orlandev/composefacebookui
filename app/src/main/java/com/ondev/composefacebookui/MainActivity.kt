@@ -7,6 +7,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,10 +56,10 @@ fun FacebookPeopleKnow() {
     Spacer(modifier = Modifier.height(10.dp))
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().background(Color.Red)
             .height(200.dp)
     ) {
-        item {
+        items(10) {
             FacebookPeoplePerfil("Lisa", R.drawable.facebook_perfil, R.drawable.facebook_perfil)
         }
     }
@@ -66,23 +67,29 @@ fun FacebookPeopleKnow() {
 
 @Composable
 fun FacebookPeoplePerfil(name: String, avatar: Int, history: Int) {
-    Column {
+    val imageHistoryRoundPercent = RoundedCornerShape(30)
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxHeight().width(140.dp).padding(facebookContentPadding)) {
         Box(contentAlignment = Alignment.Center) {
             Image(painter = painterResource(history),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize().padding(facebookContentPadding),
+                modifier = Modifier.fillMaxSize()
+                    .padding(bottom = facebookContentPadding)
+                    .clip(imageHistoryRoundPercent)
+                    .border(0.dp, color = Color.White, shape = imageHistoryRoundPercent),
                 contentDescription = null
             )
             Image(painter = painterResource(avatar),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(40.dp)
                     .align(Alignment.BottomCenter)
                     .clip(CircleShape)
-                    .border(2.dp, Color.White, CircleShape),
+                    .border(3.dp, Color.White, CircleShape),
                 contentDescription = null
             )
         }
+        Spacer(modifier = Modifier.height(8.dp))
         Text(text = name)
     }
 }
