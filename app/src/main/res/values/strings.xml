@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">composefacebookui</string>
-    <string name="text_hint_user_think" type="id">What\'s on your mind, Lisa?</string>
+    <string name="app_name">Facebook Clone</string>
+    <string name="text_hint_user_think" type="id">What\'s on your mind</string>
 </resources>
