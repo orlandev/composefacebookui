@@ -11,14 +11,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ondev.composefacebookui.components.CircleButton
@@ -73,7 +76,7 @@ fun FacebookPeopleKnow(persons: List<Person>) {
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()
-            .height(200.dp)
+            .height(200.dp).padding(2.dp)
     ) {
         items(persons) { currentPerson ->
             FacebookPeoplePerfil(currentPerson.name,
@@ -86,32 +89,40 @@ fun FacebookPeopleKnow(persons: List<Person>) {
 
 @Composable
 fun FacebookPeoplePerfil(name: String, avatar: Int, history: Int) {
-    val imageHistoryRoundPercent = RoundedCornerShape(30)
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxHeight()
-            .width(140.dp)
-            .padding(8.dp)) {
-        Box(contentAlignment = Alignment.Center) {
-            Image(painter = painterResource(history),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-                    .padding(bottom = facebookContentPadding)
-                    .clip(imageHistoryRoundPercent)
-                    .border(0.dp, color = Color.White, shape = imageHistoryRoundPercent),
-                contentDescription = null
-            )
-            Image(painter = painterResource(avatar),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(40.dp)
-                    .align(Alignment.BottomCenter)
-                    .clip(CircleShape)
-                    .border(3.dp, Color.White, CircleShape),
-                contentDescription = null
-            )
+    val imageHistoryRoundPercent = RoundedCornerShape(20)
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxHeight()
+                .width(130.dp)
+                .padding(8.dp)) {
+            Box(contentAlignment = Alignment.Center) {
+                Image(painter = painterResource(history),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                        .padding(bottom = 30.dp)
+                        .clip(imageHistoryRoundPercent)
+                        .border(0.dp, color = Color.White, shape = imageHistoryRoundPercent),
+                    contentDescription = null
+                )
+                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.align(Alignment.BottomCenter)) {
+                    Image(painter = painterResource(avatar),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clip(CircleShape)
+                            .border(3.dp, Color.White, CircleShape),
+                        contentDescription = null
+                    )
+                    Text(text = name,
+                        style = MaterialTheme.typography.subtitle1,
+                        color = facebookGray,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = name, style = MaterialTheme.typography.subtitle1)
+
     }
 }
 
