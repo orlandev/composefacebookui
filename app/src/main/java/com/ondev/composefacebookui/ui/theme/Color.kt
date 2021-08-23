@@ -8,6 +8,7 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
 val facebookGray = Color(0xffbebebe)
+val facebookDarkGray = Color(0xff646161)
 val facebookLightGray = Color(0xffe3e1e1)
 val facebookLightRed = Color(0xfffa7474)
 val facebookLightBlue = Color(0xff84b6fb)

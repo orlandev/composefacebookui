@@ -116,7 +116,7 @@ fun FacebookPeoplePerfil(name: String, avatar: Int, history: Int) {
                     )
                     Text(text = name,
                         style = MaterialTheme.typography.subtitle1,
-                        color = facebookGray,
+                        color = facebookDarkGray,
                         textAlign = TextAlign.Center
                     )
                 }
