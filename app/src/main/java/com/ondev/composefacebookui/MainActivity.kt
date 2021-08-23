@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -38,6 +39,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+//FakeData
+val persons = listOf<Person>(
+    Person("Raquel Leyva", R.drawable.perfil1, R.drawable.perfil_history1),
+    Person("Raul Estrada", R.drawable.perfil2, R.drawable.perfil_history2),
+    Person("Lisa Acosta", R.drawable.perfil3, R.drawable.perfil_history3),
+    Person("Ester Quintana", R.drawable.perfil4, R.drawable.perfil_history4),
+    Person("Juan Rodriguez", R.drawable.perfil5, R.drawable.perfil_history5),
+    Person("Milena Leyva", R.drawable.perfil6, R.drawable.perfil_history6),
+    Person("Juana Reyes", R.drawable.perfil7, R.drawable.perfil_history7),
+)
+
 val facebookContentPadding = 16.dp
 
 @Composable
@@ -47,20 +59,27 @@ fun FacebookHome() {
         FacebookBanner()
         FacebookPerfilShareThink()
         FacebookShareClips()
-        FacebookPeopleKnow()
+        FacebookPeopleKnow(persons)
     }
 }
 
+data class Person(
+    val name: String, val avatar: Int, val history: Int,
+)
+
 @Composable
-fun FacebookPeopleKnow() {
+fun FacebookPeopleKnow(persons: List<Person>) {
     Spacer(modifier = Modifier.height(10.dp))
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().background(Color.Red)
+        modifier = Modifier.fillMaxWidth()
             .height(200.dp)
     ) {
-        items(10) {
-            FacebookPeoplePerfil("Lisa", R.drawable.facebook_perfil, R.drawable.facebook_perfil)
+        items(persons) { currentPerson ->
+            FacebookPeoplePerfil(currentPerson.name,
+                currentPerson.avatar,
+                currentPerson.history
+            )
         }
     }
 }
@@ -69,7 +88,9 @@ fun FacebookPeopleKnow() {
 fun FacebookPeoplePerfil(name: String, avatar: Int, history: Int) {
     val imageHistoryRoundPercent = RoundedCornerShape(30)
     Column(horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxHeight().width(140.dp).padding(facebookContentPadding)) {
+        modifier = Modifier.fillMaxHeight()
+            .width(140.dp)
+            .padding(8.dp)) {
         Box(contentAlignment = Alignment.Center) {
             Image(painter = painterResource(history),
                 contentScale = ContentScale.Crop,
@@ -90,7 +111,7 @@ fun FacebookPeoplePerfil(name: String, avatar: Int, history: Int) {
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = name)
+        Text(text = name, style = MaterialTheme.typography.subtitle1)
     }
 }
 

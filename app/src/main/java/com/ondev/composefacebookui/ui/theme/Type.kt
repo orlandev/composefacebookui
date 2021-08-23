@@ -26,6 +26,12 @@ val Typography = Typography(
         fontFamily = facebookFont,
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp
+    ),
+
+    subtitle1 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
     )
 
     /* Other default text styles to override
