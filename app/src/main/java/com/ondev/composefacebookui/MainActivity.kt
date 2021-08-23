@@ -96,6 +96,10 @@ fun FacebookHome() {
             FacebookDivider()
         }
 
+        item {
+            Spacer(modifier = Modifier.height(facebookContentPadding))
+        }
+
     }
 }
 
@@ -163,7 +167,7 @@ fun ItemPost(post: Post) {
 fun FacebookBanner() {
     Row(modifier = Modifier.fillMaxWidth().height(70.dp)
         .padding(start = facebookContentPadding, end = facebookContentPadding)) {
-        Text(modifier = Modifier.weight(0.9f).align(Alignment.CenterVertically),
+        Text(modifier = Modifier.weight(0.5f).align(Alignment.CenterVertically),
             text = "facebook",
             color = facebookSemiDarkBlue,
             style = MaterialTheme.typography.caption
@@ -171,8 +175,8 @@ fun FacebookBanner() {
 
         Row(modifier = Modifier.fillMaxSize()
             .padding(facebookContentPadding)
-            .weight(0.9f),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            .weight(0.6f),
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
 
         ) {
